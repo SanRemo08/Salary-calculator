@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Калькулятор заработка сотрудников</title>
+</head>
+<body>
+    <h2>Калькулятор заработка сотрудников</h2>
+    
+    <label for="schedule">Выберите график работы:</label><br>
+    <select id="schedule" name="schedule">
+        <option value="6/1">6/1 (6 рабочих дней, 1 выходной)</option>
+        <option value="5/2">5/2 (5 рабочих дней, 2 выходных)</option>
+        <option value="4/3">4/3 (4 рабочих дня, 3 выходных)</option>
+    </select><br><br>
+
+    <label for="hours">Выберите количество часов работы:</label><br>
+    <select id="hours" name="hours">
+        <option value="8">8 часов</option>
+        <option value="10">10 часов</option>
+    </select><br><br>
+
+    <label for="fetish">Знание фетишей:</label><br>
+    <select id="fetish" name="fetish">
+        <option value="with">Со знанием фетишей</option>
+        <option value="without">Без знания фетишей</option>
+    </select><br><br>
+
+    <button onclick="calculateSalary()">Рассчитать зарплату</button>
+
+    <h3>Средний доход:</h3>
+    <p>По данным с прошлого месяца</p>
+    <p id="result">Зарплата: 0 долларов</p>
+
+    <script>
+        function calculateSalary() {
+            var schedule = document.getElementById('schedule').value;
+            var hours = document.getElementById('hours').value;
+            var fetish = document.getElementById('fetish').value;
+
+            var hourlyRate = 0;
+
+            if (schedule === "6/1") {
+                hourlyRate = fetish === "with" ? 5 : 2.08;
+            } else if (schedule === "5/2") {
+                hourlyRate = fetish === "with" ? 4 : 2;
+            } else if (schedule === "4/3") {
+                hourlyRate = fetish === "with" ? 4.28 : 2.14;
+            }
+
+            var salary = hourlyRate * hours * (schedule === "6/1" ? 26 : (schedule === "5/2" ? 22 : 17));
+
+            document.getElementById('result').innerHTML = "Зарплата: " + salary.toFixed(2) + " долларов";
+        }
+    </script>
+</body>
+</html>
